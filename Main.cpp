@@ -28,6 +28,89 @@
 
 using namespace std;
 
+////////////////////////////////////////////////////////////////////////////
+struct Node {
+  float data;
+  Node *next;
+};
+
+class Queue {
+private:
+  Node *front, *rear;
+  int count;
+
+public:
+  Queue();
+  ~Queue();
+  void Join(float newthing);
+  void Leave();
+  float Front();
+  bool isEmpty();
+  void PrintAllElements();
+  int getCount(){ return count; }
+
+};
+
+
+Queue::Queue() {
+// constructor
+  front = NULL;  rear = NULL; count = 0;
+}
+
+Queue::~Queue() {
+// destructor
+}
+
+void Queue::Join(float newthing) {
+// place the new thing at the rear of the queue
+Node *temp;
+  temp = new Node;
+  temp->data = newthing;
+  temp->next = NULL;
+  if (rear != NULL) { rear->next = temp; }
+  rear = temp;
+  if (front == NULL) { front = temp; }
+  count++;
+}
+
+
+void Queue::Leave() {
+// remove the front item from the queue
+Node * temp;
+  if (front == NULL) { return; }
+  temp = front;
+  front = front->next;
+  if (front == NULL) { rear = NULL; }
+  delete temp;
+  count--;
+}
+
+float Queue::Front() {
+// return the value of the front item
+  if (front != NULL) {return front->data;}
+  return 0;
+}
+
+bool Queue::isEmpty() {
+// return true if the queue is empty
+  if (front == NULL) { return true; }
+  return false;
+}
+
+void Queue::PrintAllElements(){
+    //cout<<"Linked-list: ";
+	Node *current;
+	current=front;
+	while(current!=NULL){
+        cout<<current->data;
+		current=current->next;
+	}
+	cout<<"\n";
+}
+
+////////////////////////////////////////////////////////////////////////
+
+
 #define OUTPUT_LENGTH 2 /* Length of output string. */
 
 const int HEIGHT = 400; /**< Height of board for rendering in pixels. */
