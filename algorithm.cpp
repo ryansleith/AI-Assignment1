@@ -88,7 +88,6 @@ vector<int> vector_random;
 vector<int> vector_reversed;
 vector<int> vector_sorted;
 
-/*  Implement a Heap class here (from the slides)  */
 class Heap {
 private:
     unsigned int data[DATA_SIZE];
@@ -286,11 +285,11 @@ string breadthFirstSearch_with_VisitedList(string const initialState, string con
 // Move Generator:  
 //
 ////////////////////////////////////////////////////////////////////////////////////////////
-string progressiveDeepeningSearch_No_VisitedList(string const initialState, string const goalState, int &numOfStateExpansions, int& maxQLength, float &actualRunningTime, int ultimateMaxDepth){
+string progressiveDeepeningSearch_No_VisitedList(string const initialState, string const goalState, int &numOfStateExpansions, int &maxQLength, float &actualRunningTime, int ultimateMaxDepth){
     string path;
 	clock_t startTime;
     //add necessary variables here
-
+    
 
     //algorithm implementation
 	// cout << "------------------------------" << endl;
@@ -323,7 +322,11 @@ string progressiveDeepeningSearch_with_NonStrict_VisitedList(string const initia
     string path;
 	clock_t startTime;
     //add necessary variables here
-
+    int depth = 1;
+    
+    //Call puzzle bitch at some point - Start State, Goal State needs to be sent
+    
+    //Call puzzle every time 
 
     //algorithm implementation
 	// cout << "------------------------------" << endl;
