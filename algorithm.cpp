@@ -326,7 +326,7 @@ string progressiveDeepeningSearch_with_NonStrict_VisitedList(string const initia
     
     //Call puzzle bitch at some point - Start State, Goal State needs to be sent
     
-    //Call puzzle every time 
+    //Call puzzle every time
 
     //algorithm implementation
 	// cout << "------------------------------" << endl;
