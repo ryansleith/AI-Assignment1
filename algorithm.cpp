@@ -2,6 +2,8 @@
 
 #include "algorithm.h"
 
+#define DATA_SIZE 250000
+
 using namespace std;
 
 struct Node {
@@ -13,7 +15,7 @@ class Queue {
 private:
     Node *front, *rear;
     int count;
-    
+
 public:
     Queue();
     ~Queue();
@@ -23,7 +25,7 @@ public:
     bool isEmpty();
     void PrintAllElements();
     int getCount(){ return count; }
-    
+
 };
 
 
@@ -82,6 +84,8 @@ void Queue::PrintAllElements(){
     }
     cout<<"\n";
 }
+
+Queue queue;
 
 ////////////////////////////////////////////////////////////////////////
 vector<int> vector_random;
@@ -194,7 +198,7 @@ void heapsort(vector<int> &sortingvector,int number_of_elements, char* filename)
     /* STORE how many comparisons were made until this point */
     int insertComparisons = myHeap.getComparison();
     cout<<"InsertHeap: "<< insertComparisons<< " comparisons"<<endl;
-    
+
     /* DELETE elements from the Heap, copying it back to the vector in a way that it is sorted */
     int sorted[number_of_elements];
     for (int i = 0; i < number_of_elements; ++i) {
@@ -204,7 +208,7 @@ void heapsort(vector<int> &sortingvector,int number_of_elements, char* filename)
     int deleteComparisons = myHeap.getComparison() - insertComparisons;
     cout<<"DeleteRoot: "<< deleteComparisons<< " comparisons"<<endl;
     /* PRINT the number of comparisons for the Insert and Deletion tasks */
-    
+
     /* Print the state of the vector after sorting */
     cout<<"Vector after sorting:"<<endl;
     for (int i = number_of_elements - 1; i >= 0; --i) {
@@ -220,9 +224,9 @@ void heapsort(vector<int> &sortingvector,int number_of_elements, char* filename)
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //
-// Search Algorithm:  Breadth-First Search 
+// Search Algorithm:  Breadth-First Search
 //
-// Move Generator:  
+// Move Generator:
 //
 ////////////////////////////////////////////////////////////////////////////////////////////
 string breadthFirstSearch(string const initialState, string const goalState, int &numOfStateExpansions, int& maxQLength, float &actualRunningTime){
@@ -235,24 +239,24 @@ string breadthFirstSearch(string const initialState, string const goalState, int
 	// cout << "------------------------------" << endl;
  //    cout << "<<breadthFirstSearch>>" << endl;
  //    cout << "------------------------------" << endl;
-    
+
 	startTime = clock();
-	
+
 	maxQLength=0;
-	
-	
+
+
 //***********************************************************************************************************
 	actualRunningTime = ((float)(clock() - startTime)/CLOCKS_PER_SEC);
-	path = "DDRRLLLUUU";  //this is just a dummy path for testing the function           
-	return path;		
-		
+	path = "DDRRLLLUUU";  //this is just a dummy path for testing the function
+	return path;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //
 // Search Algorithm:  Breadth-First Search with VisitedList
 //
-// Move Generator:  
+// Move Generator:
 //
 ////////////////////////////////////////////////////////////////////////////////////////////
 string breadthFirstSearch_with_VisitedList(string const initialState, string const goalState, int &numOfStateExpansions, int& maxQLength, float &actualRunningTime){
@@ -267,29 +271,29 @@ string breadthFirstSearch_with_VisitedList(string const initialState, string con
  //    cout << "------------------------------" << endl;
 
 	startTime = clock();
-	
+
 	maxQLength=0;
-	
-	
+
+
 //***********************************************************************************************************
 	actualRunningTime = ((float)(clock() - startTime)/CLOCKS_PER_SEC);
-	path = "DDRRLLLUUU";  //this is just a dummy path for testing the function           
-	return path;		
-		
+	path = "DDRRLLLUUU";  //this is just a dummy path for testing the function
+	return path;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //
-// Search Algorithm:  
+// Search Algorithm:
 //
-// Move Generator:  
+// Move Generator:
 //
 ////////////////////////////////////////////////////////////////////////////////////////////
 string progressiveDeepeningSearch_No_VisitedList(string const initialState, string const goalState, int &numOfStateExpansions, int &maxQLength, float &actualRunningTime, int ultimateMaxDepth){
     string path;
 	clock_t startTime;
     //add necessary variables here
-    
+
 
     //algorithm implementation
 	// cout << "------------------------------" << endl;
@@ -297,25 +301,25 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
  //    cout << "------------------------------" << endl;
 
 	startTime = clock();
-	
+
 	maxQLength=0;
-	
-	
+
+
 //***********************************************************************************************************
 	actualRunningTime = ((float)(clock() - startTime)/CLOCKS_PER_SEC);
-	path = "DDRRLLLUUU";  //this is just a dummy path for testing the function           
-	return path;		
-		
+	path = "DDRRLLLUUU";  //this is just a dummy path for testing the function
+	return path;
+
 }
-	
+
 
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //
-// Search Algorithm:  
+// Search Algorithm:
 //
-// Move Generator:  
+// Move Generator:
 //
 ////////////////////////////////////////////////////////////////////////////////////////////
 string progressiveDeepeningSearch_with_NonStrict_VisitedList(string const initialState, string const goalState, int &numOfStateExpansions, int& maxQLength, float &actualRunningTime, int ultimateMaxDepth){
@@ -323,9 +327,9 @@ string progressiveDeepeningSearch_with_NonStrict_VisitedList(string const initia
 	clock_t startTime;
     //add necessary variables here
     int depth = 1;
-    
+
     //Call puzzle bitch at some point - Start State, Goal State needs to be sent
-    
+
     //Call puzzle every time
 
     //algorithm implementation
@@ -334,47 +338,53 @@ string progressiveDeepeningSearch_with_NonStrict_VisitedList(string const initia
  //    cout << "------------------------------" << endl;
 
 	startTime = clock();
-	
+
 	maxQLength=0;
-	
-	
+
+
 //***********************************************************************************************************
     actualRunningTime = ((float)(clock() - startTime)/CLOCKS_PER_SEC);
 	path = "DDRRLLLUUU"; //this is just a dummy path for testing the function
-	
-	return path;		
-		
-}
-	
 
-string aStar_ExpandedList(string const initialState, string const goalState, int &numOfStateExpansions, int& maxQLength, 
+	return path;
+
+}
+
+
+string aStar_ExpandedList(string const initialState, string const goalState, int &numOfStateExpansions, int& maxQLength,
                                float &actualRunningTime, int &numOfDeletionsFromMiddleOfHeap, int &numOfLocalLoopsAvoided, int &numOfAttemptedNodeReExpansions, heuristicFunction heuristic){
-											 
+
    string path;
    clock_t startTime;
-   
+   //int TestingGoalState = 123804765;
+   //int TestingTestCase = 132084765
+
    numOfDeletionsFromMiddleOfHeap=0;
    numOfLocalLoopsAvoided=0;
    numOfAttemptedNodeReExpansions=0;
+
+   //find path of action
+   //admissable heroustics f = g + h
+   // f(node(S)) = g(node(S)) + h(node(S))
+   // f(node(A)) = g(node(S+A)) + h(node(A))
+   // f(node(B)) = g(node(S+B)) + h(node(A))
+   //call heuristicFunction with numOfMisplacedTiles
+
 
 
     // cout << "------------------------------" << endl;
     // cout << "<<aStar_ExpandedList>>" << endl;
     // cout << "------------------------------" << endl;
-	actualRunningTime=0.0;	
+	actualRunningTime=0.0;
 	startTime = clock();
 
 	maxQLength=0;
-	
-	
+
+
 //***********************************************************************************************************
 	actualRunningTime = ((float)(clock() - startTime)/CLOCKS_PER_SEC);
 	path = "DDRRLLLUUU"; //this is just a dummy path for testing the function
-	             
-	return path;		
-		
+
+	return path;
+
 }
-
-
-
-
