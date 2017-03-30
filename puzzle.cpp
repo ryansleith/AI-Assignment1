@@ -31,7 +31,7 @@ Puzzle::Puzzle(const Puzzle &p) : path(p.path){
 //constructor
 //inputs:  initial state, goal state
 //////////////////////////////////////////////////////////////
-Puzzle::Puzzle(string const elements, string const goal){
+Puzzle::Puzzle(string const elements, string const goal) {
 	
 	int n;
 	
