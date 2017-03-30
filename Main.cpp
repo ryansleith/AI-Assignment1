@@ -5,7 +5,7 @@
 //
 //  Name(s): Matt Kitch
 //  Name(s): Ryan Sleith
-//  Name(s): Zane Dlow Randell
+//  Name(s): Zane Randell
 //  Date:
 //
 //////////////////////////////////////////////////////////////////////////
