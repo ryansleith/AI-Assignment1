@@ -1,5 +1,3 @@
-
-
 #include "algorithm.h"
 
 #define DATA_SIZE 250000
@@ -85,17 +83,11 @@ void Queue::PrintAllElements(){
     cout<<"\n";
 }
 
-<<<<<<< HEAD
-=======
-Queue queue;
->>>>>>> origin/master
-
 ////////////////////////////////////////////////////////////////////////
 vector<int> vector_random;
 vector<int> vector_reversed;
 vector<int> vector_sorted;
 
-<<<<<<< HEAD
 //class Heap {
 //private:
 //    unsigned int data[DATA_SIZE];
@@ -243,10 +235,6 @@ string breadthFirstSearch(string const initialState, string const goalState, int
  //    cout << "------------------------------" << endl;
 
 	startTime = clock();
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 	maxQLength=0;
 
 
@@ -298,7 +286,6 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
     string path;
 	clock_t startTime;
     //add necessary variables here
-<<<<<<< HEAD
     int depth = 0;
     
     Queue searchQueue;
@@ -306,9 +293,6 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
     cout << "Inital State:" << initialState;
     
     Puzzle startState(initialState, goalState);
-=======
-
->>>>>>> origin/master
 
     //algorithm implementation
 	// cout << "------------------------------" << endl;
@@ -320,15 +304,6 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
 	startTime = clock();
 
 	maxQLength=0;
-<<<<<<< HEAD
-    
-    
-	
-	
-=======
-
-
->>>>>>> origin/master
 //***********************************************************************************************************
 	actualRunningTime = ((float)(clock() - startTime)/CLOCKS_PER_SEC);
 	path = "DDRRLLLUUU";  //this is just a dummy path for testing the function
