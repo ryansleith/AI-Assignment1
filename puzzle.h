@@ -63,10 +63,10 @@ public:
 	 bool canMoveUp(int maxDepth);	 
 //----------------------------------------
 	  
-    Puzzle * moveLeft();
-    Puzzle * moveRight();
-    Puzzle * moveUp();
-    Puzzle * moveDown();
+    Puzzle* moveLeft();
+    Puzzle* moveRight();
+    Puzzle* moveUp();
+    Puzzle* moveDown();
 	 
 	 
     const string getPath();

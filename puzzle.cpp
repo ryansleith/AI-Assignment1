@@ -24,7 +24,6 @@ Puzzle::Puzzle(const Puzzle &p) : path(p.path){
 	fCost = p.fCost;	
 	strBoard = toString(); //uses the board contents to generate the string equivalent
 	depth = p.depth;
-	
 }
 
 //////////////////////////////////////////////////////////////
@@ -110,8 +109,7 @@ int Puzzle::h(heuristicFunction hFunction){
 		        //place your implementation here
 		        
 		        h = sum; 					
-		        break;         
-		           
+		        break;
 	};
 	
 	return h;
@@ -140,9 +138,17 @@ string Puzzle::toString(){
 
 
 bool Puzzle::goalMatch(){
-	bool result=false;
+	bool result=true;
     
-    //this is incomplete...
+    //this is now complete 😉
+    for (int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            if (board[i][j] != goalBoard[i][j]) {
+                result = false;
+            }
+        }
+    }
+    
 	return result;
 }
 
@@ -179,18 +185,35 @@ bool Puzzle::canMoveDown(){
 
 bool Puzzle::canMoveLeft(int maxDepth){
   	//put your implementations here
+    if(this->depth != maxDepth && this->canMoveLeft()) {
+        return true;
+    }
+    return false;
 }
+
 bool Puzzle::canMoveRight(int maxDepth){
    //put your implementations here
+    if(this->depth != maxDepth && this->canMoveRight()) {
+        return true;
+    }
+    return false;
 }
 
 
 bool Puzzle::canMoveUp(int maxDepth){
-   //put your implementations here	
+   //put your implementations here
+    if(this->depth != maxDepth && this->canMoveUp()) {
+        return true;
+    }
+    return false;
 }
 
 bool Puzzle::canMoveDown(int maxDepth){
    //put your implementations here
+    if(this->depth != maxDepth && this->canMoveDown()) {
+        return true;
+    }
+    return false;
 }
 
 ///////////////////////////////////////////////

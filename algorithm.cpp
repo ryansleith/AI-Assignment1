@@ -5,7 +5,7 @@
 using namespace std;
 
 struct Node {
-    Puzzle data;
+    Puzzle *data;
     Node *next;
 };
 
@@ -17,13 +17,12 @@ private:
 public:
     Queue();
     ~Queue();
-    void Join(Puzzle newthing);
+    void Join(Puzzle *newthing);
     void Leave();
-    float Front();
+    Puzzle* Front();
     bool isEmpty();
     void PrintAllElements();
     int getCount(){ return count; }
-
 };
 
 
@@ -36,7 +35,7 @@ Queue::~Queue() {
     // destructor
 }
 
-void Queue::Join(Puzzle newthing) {
+void Queue::Join(Puzzle *newthing) {
     // place the new thing at the rear of the queue
     Node *temp;
     temp = new Node;
@@ -55,15 +54,16 @@ void Queue::Leave() {
     if (front == NULL) { return; }
     temp = front;
     front = front->next;
+    //Should memory state for data be deleted too as the Queue Element being deleted will just delete the reference?
     if (front == NULL) { rear = NULL; }
     delete temp;
     count--;
 }
 
-float Queue::Front() {
+Puzzle* Queue::Front() {
     // return the value of the front item
     if (front != NULL) {return front->data;}
-    return 0;
+    return NULL;
 }
 
 bool Queue::isEmpty() {
@@ -286,22 +286,46 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
     string path;
 	clock_t startTime;
     //add necessary variables here
-    int depth = 0;
     
     Queue searchQueue;
     
     cout << "Inital State:" << initialState;
     
-    Puzzle startState(initialState, goalState);
+    Puzzle *startState = new Puzzle(initialState, goalState);
 
     //algorithm implementation
-	// cout << "------------------------------" << endl;
- //    cout << "<<progressiveDeepeningSearch_No_VisitedList>>" << endl;
- //    cout << "------------------------------" << endl;
+    cout << "------------------------------" << endl;
+    cout << "<<progressiveDeepeningSearch_No_VisitedList >>" << endl;
+    cout << "------------------------------" << endl;
     
+    //Passing start state to the queue need to keep startState in memory
+    searchQueue.Join(startState);
     
-
-	startTime = clock();
+    startTime = clock();
+    
+    int maxDepth = 1;
+    while(!searchQueue.Front()->goalMatch()) {
+        Puzzle searchState = *searchQueue.Front();
+        cout << searchState.toString() << endl;
+        searchQueue.Leave();
+        while(searchState.getDepth() != maxDepth) {
+            if (searchState.canMoveUp(maxDepth)) {
+                cout << "Move Up" << endl;
+                //Use the Puzzle->moveUp returns a new puzzle object
+                //Join a new puzzle element
+            }
+            if (searchState.canMoveRight(maxDepth)) {
+                cout << "Move Right" << endl;
+            }
+            if (searchState.canMoveDown(maxDepth)) {
+                cout << "Move Down" << endl;
+            }
+            if (searchState.canMoveLeft(maxDepth)) {
+                cout << "Move Left" << endl;
+            }
+            maxDepth++;
+        }
+    }
 
 	maxQLength=0;
 //***********************************************************************************************************
