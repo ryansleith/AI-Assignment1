@@ -130,7 +130,7 @@ string Puzzle::toString(){
 		} 
   }
   
-//  cout << "toString = " << stringPath << endl;
+  cout << "toString = " << stringPath << endl;
   
   return stringPath;
 }
