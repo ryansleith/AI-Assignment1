@@ -194,7 +194,7 @@ vector<int> vector_sorted;
 //    /* STORE how many comparisons were made until this point */
 //    int insertComparisons = myHeap.getComparison();
 //    cout<<"InsertHeap: "<< insertComparisons<< " comparisons"<<endl;
-//    
+//
 //    /* DELETE elements from the Heap, copying it back to the vector in a way that it is sorted */
 //    int sorted[number_of_elements];
 //    for (int i = 0; i < number_of_elements; ++i) {
@@ -204,7 +204,7 @@ vector<int> vector_sorted;
 //    int deleteComparisons = myHeap.getComparison() - insertComparisons;
 //    cout<<"DeleteRoot: "<< deleteComparisons<< " comparisons"<<endl;
 //    /* PRINT the number of comparisons for the Insert and Deletion tasks */
-//    
+//
 //    /* Print the state of the vector after sorting */
 //    cout<<"Vector after sorting:"<<endl;
 //    for (int i = number_of_elements - 1; i >= 0; --i) {
@@ -290,15 +290,15 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
     cout << "------------------------------" << endl;
     cout << "<<progressiveDeepeningSearch_No_VisitedList >>" << endl;
     cout << "------------------------------" << endl;
-    
+
     Queue searchQueue;
     cout << "Inital State:" << initialState;
-    
+
     Puzzle *startState = new Puzzle(initialState, goalState);
     searchQueue.Join(startState);
-    
+
     startTime = clock();
-    
+
     int maxDepth = 1;
     while((!searchQueue.Front()->goalMatch()) || (searchQueue.Front() != NULL)) {
         Puzzle *searchState = searchQueue.Front();
@@ -390,6 +390,10 @@ string aStar_ExpandedList(string const initialState, string const goalState, int
    numOfDeletionsFromMiddleOfHeap=0;
    numOfLocalLoopsAvoided=0;
    numOfAttemptedNodeReExpansions=0;
+
+   // call hFunction with number of tiles moved
+   //create instance of puzzle and find heuristic value
+   
 
    //find path of action
    //admissable heroustics f = g + h
