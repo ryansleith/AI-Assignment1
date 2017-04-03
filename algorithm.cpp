@@ -13,7 +13,7 @@ class Queue {
 private:
     Node *front, *rear;
     int count;
-
+    int maxSize;
 public:
     Queue();
     ~Queue();
@@ -23,12 +23,13 @@ public:
     bool isEmpty();
     void PrintAllElements();
     int getCount(){ return count; }
+    int getMaxSize() { return maxSize; }
 };
 
 
 Queue::Queue() {
     // constructor
-    front = NULL;  rear = NULL; count = 0;
+    front = NULL;  rear = NULL; count = 0; maxSize = 0;
 }
 
 Queue::~Queue() {
@@ -36,7 +37,7 @@ Queue::~Queue() {
 }
 
 void Queue::Join(Puzzle *newthing) {
-    // place the new thing at the rear of the queue
+    // place the new thing at the front of the queue
     Node *temp;
     temp = new Node;
     temp->data = newthing;
@@ -45,6 +46,9 @@ void Queue::Join(Puzzle *newthing) {
     rear = temp;
     if (front == NULL) { front = temp; }
     count++;
+    if (count > maxSize) {
+        maxSize = count;
+    }
 }
 
 
@@ -76,11 +80,12 @@ void Queue::PrintAllElements(){
     //cout<<"Linked-list: ";
     Node *current;
     current=front;
+    cout << "Queue Elements: ";
     while(current!=NULL){
-        cout<<current->data;
+        cout << current->data->toString() << ", ";
         current=current->next;
     }
-    cout<<"\n";
+    cout<<"end of Queue\n";
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -290,57 +295,69 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
     cout << "------------------------------" << endl;
     cout << "<<progressiveDeepeningSearch_No_VisitedList >>" << endl;
     cout << "------------------------------" << endl;
-    
-    Queue searchQueue;
     cout << "Inital State:" << initialState;
     
+    Queue searchQueue;
     Puzzle *startState = new Puzzle(initialState, goalState);
-    searchQueue.Join(startState);
+    Puzzle *searchState;
+    int maxDepth, count;
+    maxDepth = count = 1;
     bool goalFound = false;
-    
     startTime = clock();
-    
-    int maxDepth = count = 1;
-    while(!searchQueue.isEmpty() && maxDepth < 5) {
-        Puzzle *searchState = searchQueue.Front();
-        if (searchState->goalMatch()) {
-            cout << "Goal Found!" << endl;
-            goalFound = true;
-            break;
-        }
-        cout << "Depth: " << searchState->getDepth() << endl;
+    while (!goalFound) {
+        //Add start node to Queue to restart searching at deeper depth.
+        searchState = startState;
+        cout << "Start State: " << searchState->toString() << endl;
+        do {
+            if (searchState->goalMatch()) {
+                cout << "Goal Found!" << endl;
+                goalFound = true;
+                break;
+            }
+            //cout << "Depth: " << searchState->getDepth() << endl;
+            //cout << "Max-Depth: " << maxDepth << endl;
             if(searchState->getDepth() <= maxDepth) {
-                searchState->printBoard();
+                //cout << "Search State No: " << count << endl;
+                //searchState->printBoard();
+                //searchQueue.PrintAllElements();
                 searchQueue.Leave();
-                if (searchQueue.isEmpty()) {
+                /*if (searchQueue.isEmpty()) {
                     cout << "Queue is empty" << endl;
                 } else {
                     cout << "Queue is not empty" << endl;
-                }
+                }*/
                 if (searchState->canMoveUp(maxDepth)) {
-                    cout << "Move Up" << endl;
+                    //cout << "Move Up" << endl;
                     searchQueue.Join(searchState->moveUp());
                 }
                 if (searchState->canMoveRight(maxDepth)) {
-                    cout << "Move Right" << endl;
+                    //cout << "Move Right" << endl;
                     searchQueue.Join(searchState->moveRight());
                 }
                 if (searchState->canMoveDown(maxDepth)) {
-                    cout << "Move Down" << endl;
+                    //cout << "Move Down" << endl;
                     searchQueue.Join(searchState->moveDown());
                 }
                 if (searchState->canMoveLeft(maxDepth)) {
-                    cout << "Move Left" << endl;
+                    //cout << "Move Left" << endl;
                     searchQueue.Join(searchState->moveLeft());
                 }
-                if (searchState != NULL) {
-                    delete searchState;
+                if (searchState != NULL || searchState != startState) {
+                    delete &searchState;
+                    count++;
                 }
-        }
+                searchState = searchQueue.Front();
+                }
+        } while(!searchQueue.isEmpty());
         maxDepth++;
+        cout << "Incease search to depth: " << maxDepth << endl;
     }
     
-    cout << "No Goal Found!" << endl;
+    if (goalFound) {
+        cout << "-----Goal Found!-----" << endl;
+    } else {
+        cout << "-----No Goal Found!-----" << endl;
+    }
 
 	maxQLength=0;
 //***********************************************************************************************************

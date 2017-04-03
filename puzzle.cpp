@@ -130,7 +130,7 @@ string Puzzle::toString(){
 		} 
   }
   
-  cout << "toString = " << stringPath << endl;
+  //cout << "toString = " << stringPath << endl;
   
   return stringPath;
 }
@@ -273,7 +273,7 @@ Puzzle *Puzzle::moveUp(){
 	
    Puzzle *p = new Puzzle(*this);
 	
-	
+    
    if(y0 > 0){
 		
 		p->board[y0][x0] = p->board[y0-1][x0];

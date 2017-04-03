@@ -23,6 +23,7 @@ echo.
 @echo INIT_STATE (4): 567408321, GOAL_STATE: 123804765
 @echo INIT_STATE (5): 463508721, GOAL_STATE: 123804765
 @echo INIT_STATE (6): 471506238, GOAL_STATE: 123804765
+@echo INIT_STATE (7): 283104765, GOAL_STATE: 123804765
 echo.
 set /p testcase="Select Test Case: "
 @echo You picked Test case # %testcase%
@@ -39,7 +40,8 @@ if %testcase% == 1 ( set param2= 042158367 123804765
   ) else if %testcase% == 3 ( set param2= 281463075 123804765
   ) else if %testcase% == 4 ( set param2= 567408321 123804765
   ) else if %testcase% == 5 ( set param2= 463508721 123804765
-  ) else if %testcase% == 6 ( set param2= 471506238 123804765 )
+  ) else if %testcase% == 6 ( set param2= 471506238 123804765
+  ) else if %testcase% == 7 ( set param2= 283104765 123804765 )
 
 set param=%param1% %param2%
 echo %param%
