@@ -18,7 +18,7 @@ Puzzle::Puzzle(const Puzzle &p) : path(p.path){
 
 	x0 = p.x0;
 	y0 = p.y0;
-	//path = p.path;
+	path = p.path;
 	pathLength = p.pathLength;
 	hCost = p.hCost;
 	fCost = p.fCost;
@@ -134,9 +134,15 @@ string Puzzle::toString(){
 		    n++;
 		}
   }
+<<<<<<< HEAD
 
   cout << "toString = " << stringPath << endl;
 
+=======
+  
+  //cout << "toString = " << stringPath << endl;
+  
+>>>>>>> origin/master
   return stringPath;
 }
 
@@ -277,8 +283,13 @@ Puzzle *Puzzle::moveRight(){
 Puzzle *Puzzle::moveUp(){
 
    Puzzle *p = new Puzzle(*this);
+<<<<<<< HEAD
 
 
+=======
+	
+    
+>>>>>>> origin/master
    if(y0 > 0){
 
 		p->board[y0][x0] = p->board[y0-1][x0];
