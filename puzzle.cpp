@@ -196,16 +196,16 @@ bool Puzzle::canMoveDown(){
 
 bool Puzzle::canMoveLeft(int maxDepth){
   	//put your implementations here
-    if(this->depth != maxDepth && this->canMoveLeft()) {
-        return true;
+    if(depth <= maxDepth) {
+        return (x0 > 0);
     }
     return false;
 }
 
 bool Puzzle::canMoveRight(int maxDepth){
    //put your implementations here
-    if(this->depth != maxDepth && this->canMoveRight()) {
-        return true;
+    if(depth <= maxDepth) {
+        return (x0 < 2);
     }
     return false;
 }
@@ -213,16 +213,16 @@ bool Puzzle::canMoveRight(int maxDepth){
 
 bool Puzzle::canMoveUp(int maxDepth){
    //put your implementations here
-    if(this->depth != maxDepth && this->canMoveUp()) {
-        return true;
+    if(depth <= maxDepth) {
+        return (y0 > 0);
     }
     return false;
 }
 
 bool Puzzle::canMoveDown(int maxDepth){
    //put your implementations here
-    if(this->depth != maxDepth && this->canMoveDown()) {
-        return true;
+    if(depth <= maxDepth) {
+        return (y0 < 2);
     }
     return false;
 }

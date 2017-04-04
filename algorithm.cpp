@@ -18,6 +18,7 @@ public:
     Queue();
     ~Queue();
     void Join(Puzzle *newthing);
+    void JoinFront(Puzzle *newthing);
     void Leave();
     Puzzle* Front();
     bool isEmpty();
@@ -51,6 +52,20 @@ void Queue::Join(Puzzle *newthing) {
     }
 }
 
+void Queue::JoinFront(Puzzle *newthing) {
+    // place the new thing at the front of the dequeue
+    Node *temp;
+    temp = new Node;
+    temp->data = newthing;
+    temp->next = front;
+    front=temp;
+    if (rear == NULL) { rear = temp; }
+    count++;
+    if (count > maxSize) {
+        maxSize = count;
+    }
+}
+
 
 void Queue::Leave() {
     // remove the front item from the queue
@@ -58,7 +73,6 @@ void Queue::Leave() {
     if (front == NULL) { return; }
     temp = front;
     front = front->next;
-    //Should memory state for data be deleted too as the Queue Element being deleted will just delete the reference?
     if (front == NULL) { rear = NULL; }
     delete temp;
     count--;
@@ -319,19 +333,21 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
     cout << "Inital State:" << initialState;
     
     Queue searchQueue;
-    Puzzle *startState = new Puzzle(initialState, goalState);
-    Puzzle *searchState;
+    Puzzle *searchState, *foundGoalState;
     int maxDepth, count;
     maxDepth = count = 1;
     bool goalFound = false;
     startTime = clock();
     while (!goalFound) {
         //Add start node to Queue to restart searching at deeper depth.
+        Puzzle *startState = new Puzzle(initialState, goalState);
         searchState = startState;
+        count = 0;
         cout << "Start State: " << searchState->toString() << endl;
         do {
             if (searchState->goalMatch()) {
                 cout << "Goal Found!" << endl;
+                foundGoalState = searchState;
                 goalFound = true;
                 break;
 >>>>>>> origin/master
@@ -341,35 +357,41 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
             if(searchState->getDepth() <= maxDepth) {
                 //cout << "Search State No: " << count << endl;
                 //searchState->printBoard();
-                //searchQueue.PrintAllElements();
-                searchQueue.Leave();
                 /*if (searchQueue.isEmpty()) {
                     cout << "Queue is empty" << endl;
                 } else {
                     cout << "Queue is not empty" << endl;
                 }*/
+                //Calculate last state to save time
                 if (searchState->canMoveUp(maxDepth)) {
                     //cout << "Move Up" << endl;
-                    searchQueue.Join(searchState->moveUp());
+                    if(searchState->getPath()[searchState->getPathLength()-1] == "D") {
+                        searchQueue.JoinFront(searchState->moveUp());
+                    }
                 }
                 if (searchState->canMoveRight(maxDepth)) {
                     //cout << "Move Right" << endl;
-                    searchQueue.Join(searchState->moveRight());
+                    searchQueue.JoinFront(searchState->moveRight());
                 }
                 if (searchState->canMoveDown(maxDepth)) {
                     //cout << "Move Down" << endl;
-                    searchQueue.Join(searchState->moveDown());
+                    searchQueue.JoinFront(searchState->moveDown());
                 }
                 if (searchState->canMoveLeft(maxDepth)) {
                     //cout << "Move Left" << endl;
-                    searchQueue.Join(searchState->moveLeft());
+                    searchQueue.JoinFront(searchState->moveLeft());
                 }
-                if (searchState != NULL || searchState != startState) {
-                    delete &searchState;
-                    count++;
-                }
-                searchState = searchQueue.Front();
-                }
+            }
+            delete searchState;
+            searchState = searchQueue.Front();
+            searchQueue.Leave();
+            count++;
+            if (count % 1000000 == 0) {
+                cout << "Searching..." << endl;
+                searchQueue.PrintAllElements();
+            }
+            //searchQueue.PrintAllElements();
+            //cout << "SearchState: " << searchState->toString() << " startstate: " << startState->toString() << endl;
         } while(!searchQueue.isEmpty());
         maxDepth++;
         cout << "Incease search to depth: " << maxDepth << endl;
@@ -377,14 +399,16 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
     
     if (goalFound) {
         cout << "-----Goal Found!-----" << endl;
+        cout << "State Number: " << count << endl;
+        path = foundGoalState->getPath();  //this is just a dummy path for testing the function
     } else {
         cout << "-----No Goal Found!-----" << endl;
+        path = "DDRRLLLUUU";  //this is just a dummy path for testing the function
     }
 
-	maxQLength=0;
+	maxQLength=searchQueue.getMaxSize();
 //***********************************************************************************************************
 	actualRunningTime = ((float)(clock() - startTime)/CLOCKS_PER_SEC);
-	path = "DDRRLLLUUU";  //this is just a dummy path for testing the function
 	return path;
 
 }
