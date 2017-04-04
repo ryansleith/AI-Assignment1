@@ -329,16 +329,16 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
                 cout << "Queue is empty" << endl;
             } else {
                 cout << "Queue is not empty" << endl;
-=======
-    cout << "Inital State:" << initialState;
+            }
+            cout << "Inital State:" << initialState;
     
-    Queue searchQueue;
-    Puzzle *searchState, *foundGoalState;
-    int maxDepth, count;
-    maxDepth = count = 1;
-    bool goalFound = false;
-    startTime = clock();
-    while (!goalFound) {
+            Queue searchQueue;
+            Puzzle *searchState, *foundGoalState;
+            int maxDepth, count;
+            maxDepth = count = 1;
+            bool goalFound = false;
+            startTime = clock();
+            while (!goalFound) {
         //Add start node to Queue to restart searching at deeper depth.
         Puzzle *startState = new Puzzle(initialState, goalState);
         searchState = startState;
@@ -350,7 +350,6 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
                 foundGoalState = searchState;
                 goalFound = true;
                 break;
->>>>>>> origin/master
             }
             //cout << "Depth: " << searchState->getDepth() << endl;
             //cout << "Max-Depth: " << maxDepth << endl;
