@@ -134,15 +134,8 @@ string Puzzle::toString(){
 		    n++;
 		}
   }
-<<<<<<< HEAD
 
-  cout << "toString = " << stringPath << endl;
-
-=======
-  
   //cout << "toString = " << stringPath << endl;
-  
->>>>>>> origin/master
   return stringPath;
 }
 
@@ -283,13 +276,7 @@ Puzzle *Puzzle::moveRight(){
 Puzzle *Puzzle::moveUp(){
 
    Puzzle *p = new Puzzle(*this);
-<<<<<<< HEAD
 
-
-=======
-	
-    
->>>>>>> origin/master
    if(y0 > 0){
 
 		p->board[y0][x0] = p->board[y0-1][x0];

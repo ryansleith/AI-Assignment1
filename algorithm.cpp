@@ -309,41 +309,22 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
     cout << "------------------------------" << endl;
     cout << "<<progressiveDeepeningSearch_No_VisitedList >>" << endl;
     cout << "------------------------------" << endl;
-<<<<<<< HEAD
 
     Queue searchQueue;
     cout << "Inital State:" << initialState;
 
-    Puzzle *startState = new Puzzle(initialState, goalState);
-    searchQueue.Join(startState);
-
+    Puzzle *searchState, *foundGoalState;
+    int maxDepth, count;
+    maxDepth = count = 1;
+    bool goalFound = false;
     startTime = clock();
-
-    int maxDepth = 1;
-    while((!searchQueue.Front()->goalMatch()) || (searchQueue.Front() != NULL)) {
-        Puzzle *searchState = searchQueue.Front();
-        while(searchState->getDepth() != maxDepth) {
-            searchState->printBoard();
-            searchQueue.Leave();
-            if (searchQueue.isEmpty()) {
-                cout << "Queue is empty" << endl;
-            } else {
-                cout << "Queue is not empty" << endl;
-            }
-            cout << "Inital State:" << initialState;
-    
-            Queue searchQueue;
-            Puzzle *searchState, *foundGoalState;
-            int maxDepth, count;
-            maxDepth = count = 1;
-            bool goalFound = false;
-            startTime = clock();
-            while (!goalFound) {
+    while (!goalFound) {
         //Add start node to Queue to restart searching at deeper depth.
         Puzzle *startState = new Puzzle(initialState, goalState);
         searchState = startState;
         count = 0;
         cout << "Start State: " << searchState->toString() << endl;
+
         do {
             if (searchState->goalMatch()) {
                 cout << "Goal Found!" << endl;
@@ -364,9 +345,9 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
                 //Calculate last state to save time
                 if (searchState->canMoveUp(maxDepth)) {
                     //cout << "Move Up" << endl;
-                    if(searchState->getPath()[searchState->getPathLength()-1] == "D") {
+                    //if(searchState->getPath()[searchState->getPathLength()-1] == "D") {
                         searchQueue.JoinFront(searchState->moveUp());
-                    }
+                    //}
                 }
                 if (searchState->canMoveRight(maxDepth)) {
                     //cout << "Move Right" << endl;
@@ -406,10 +387,9 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
     }
 
 	maxQLength=searchQueue.getMaxSize();
-//***********************************************************************************************************
+//]***********************************************************************************************************
 	actualRunningTime = ((float)(clock() - startTime)/CLOCKS_PER_SEC);
 	return path;
-
 }
 
 
