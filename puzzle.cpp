@@ -337,3 +337,7 @@ void Puzzle::printBoard(){
 int Puzzle::getPathLength(){
 	return pathLength;
 }
+
+char Puzzle::getLastMove(int index) {
+    return path[index];
+}

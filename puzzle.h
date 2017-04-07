@@ -75,6 +75,7 @@ public:
     int getDepth();
     
     int getPathLength();
+    char getLastMove(int index);
     int getFCost();
 	int getHCost();
 	int getGCost();	

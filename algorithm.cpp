@@ -345,9 +345,9 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
                 //Calculate last state to save time
                 if (searchState->canMoveUp(maxDepth)) {
                     //cout << "Move Up" << endl;
-                    //if(searchState->getPath()[searchState->getPathLength()-1] == "D") {
+                    if(searchState->getLastMove(searchState->getPathLength()-1) == "D") {
                         searchQueue.JoinFront(searchState->moveUp());
-                    //}
+                    }
                 }
                 if (searchState->canMoveRight(maxDepth)) {
                     //cout << "Move Right" << endl;
@@ -369,6 +369,7 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
             if (count % 1000000 == 0) {
                 cout << "Searching..." << endl;
                 searchQueue.PrintAllElements();
+                cout << "Depth: " << searchState->Depth(); << endl;
             }
             //searchQueue.PrintAllElements();
             //cout << "SearchState: " << searchState->toString() << " startstate: " << startState->toString() << endl;
