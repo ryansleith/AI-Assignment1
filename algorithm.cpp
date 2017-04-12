@@ -345,21 +345,27 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
                 //Calculate last state to save time
                 if (searchState->canMoveUp(maxDepth)) {
                     //cout << "Move Up" << endl;
-                    if(searchState->getLastMove(searchState->getPathLength()-1) == "D") {
+                    if(searchState->getLastMove(searchState->getPathLength()-1) != 'D' || count == 0) {
                         searchQueue.JoinFront(searchState->moveUp());
                     }
                 }
                 if (searchState->canMoveRight(maxDepth)) {
                     //cout << "Move Right" << endl;
-                    searchQueue.JoinFront(searchState->moveRight());
+                    if(searchState->getLastMove(searchState->getPathLength()-1) != 'L' || count == 0) {
+                        searchQueue.JoinFront(searchState->moveRight());
+                    }
                 }
                 if (searchState->canMoveDown(maxDepth)) {
                     //cout << "Move Down" << endl;
-                    searchQueue.JoinFront(searchState->moveDown());
+                    if(searchState->getLastMove(searchState->getPathLength()-1) != 'U' || count == 0) {
+                        searchQueue.JoinFront(searchState->moveDown());
+                    }
                 }
                 if (searchState->canMoveLeft(maxDepth)) {
                     //cout << "Move Left" << endl;
-                    searchQueue.JoinFront(searchState->moveLeft());
+                    if(searchState->getLastMove(searchState->getPathLength()-1) != 'R' || count == 0) {
+                        searchQueue.JoinFront(searchState->moveLeft());
+                    }
                 }
             }
             delete searchState;
@@ -369,7 +375,7 @@ string progressiveDeepeningSearch_No_VisitedList(string const initialState, stri
             if (count % 1000000 == 0) {
                 cout << "Searching..." << endl;
                 searchQueue.PrintAllElements();
-                cout << "Depth: " << searchState->Depth(); << endl;
+                cout << "Depth: " << searchState->getDepth() << endl;
             }
             //searchQueue.PrintAllElements();
             //cout << "SearchState: " << searchState->toString() << " startstate: " << startState->toString() << endl;
