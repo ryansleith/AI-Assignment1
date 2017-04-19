@@ -25,16 +25,8 @@
 
 #include "graphics.h"
 #include "algorithm.h"
-#define DATA_SIZE 250000
-
 
 using namespace std;
-
-
-////////////////////////////////////////////////////////////////////////////
-
-
-
 
 #define OUTPUT_LENGTH 2 /* Length of output string. */
 

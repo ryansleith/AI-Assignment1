@@ -7,6 +7,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
+#include <vector>
 
 #include "puzzle.h"
 
