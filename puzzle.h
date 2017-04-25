@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -40,7 +41,9 @@ public:
     void updateHCost(heuristicFunction hFunction);
     void updateDepth(){
 		 depth++;
-	}		 
+	}
+    
+    int visitedListShallowerState(vector<Puzzle> visitedList);
 	 	  
 	 
     bool goalMatch();

@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <vector>
+#include <map>
+#include <math.h>
 
 #include "puzzle.h"
 

@@ -319,6 +319,35 @@ Puzzle *Puzzle::moveDown(){
 	return p;
 
 }
+/////////////////////////////////////////////////////
+
+int Puzzle::visitedListShallowerState(vector<Puzzle> visitedList) {
+    //Take in the vector<Puzzle> that is the visited list
+    vector<Puzzle>::iterator visitedListIterator;
+    
+    int count = 0;
+    //Iterate through Visited List
+    for(visitedListIterator = visitedList.begin();
+        visitedListIterator != visitedList.end();
+        visitedListIterator++)
+    {
+        //cout << "Vector element " << count << ": '" << visitedListIterator->toString() << " is ";
+        if(getString() == visitedListIterator->getString()) {
+            //cout << "At index " << count << "equal states:  " << visitedListIterator->toString() << " " << toString() << endl;
+            if(getDepth() < visitedListIterator->getDepth()) {
+                //cout << "At index " << count << "State: " << toString() << " depth of: " << getDepth() << " is less than: " << visitedListIterator->getDepth() << " " << endl;
+                return count;
+            } else {
+                //cout << "State: " << toString() << " depth of: " << getDepth() << " is more than or equal to: " << visitedListIterator->getDepth() << endl;
+                return -1;
+            }
+        }
+        //cout << "Not equal to " << toString() << endl;
+        count++;
+    }
+           //cout << "Visited List does not contain the state: " << toString() << endl;
+    return count;
+}
 
 /////////////////////////////////////////////////////
 
